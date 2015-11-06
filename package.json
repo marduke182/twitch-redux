@@ -1,0 +1,15 @@
+{
+  "name": "nko2015-entry",
+  "version": "0.0.1",
+  "description": "Our soon to be awesome entry for NKO2015. Let's make something amazing.",
+  "author": "Node Knockout Team <all@nodeknockout.com>",
+  "main": "./app.js",
+  "dependencies": {
+    "express": "3.x.x"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "postinstall": "node scripts/postinstall.js"
+  }
+
+}
