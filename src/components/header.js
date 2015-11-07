@@ -3,7 +3,9 @@ import { Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-boo
 
 export default () => (
   <Navbar inverse toggleNavKey={0}>
-    <NavBrand><a href='#'>Twitch Redux</a></NavBrand>
+    <NavBrand>
+      <a href='#'>Twitch Redux</a>
+    </NavBrand>
     <Nav right eventKey={0}> {/* This is the eventKey referenced */}
       <NavItem eventKey={1} href='#'>Link</NavItem>
       <NavItem eventKey={2} href='#'>Link</NavItem>
@@ -14,6 +16,17 @@ export default () => (
         <MenuItem divider />
         <MenuItem eventKey='4'>Separated link</MenuItem>
       </NavDropdown>
+      <NavItem>
+        <iframe
+          src='http://nodeknockout.com/iframe/usb-in-barcelona'
+          frameBorder='0'
+          scrolling='no'
+          allowTransparency='true'
+          width='115'
+          height='25'
+        >
+        </iframe>
+      </NavItem>
     </Nav>
   </Navbar>
 );

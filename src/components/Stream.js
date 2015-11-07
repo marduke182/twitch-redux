@@ -7,7 +7,7 @@ class Stream extends React.Component {
     const { streamId, streams, channels, onClick} = this.props;
     const stream = streams[streamId];
     const channel = channels[stream.channel];
-    
+
     return (
       <div className='stream-container col-md-4' onClick={onClick}>
         <div className='stream-image'>

@@ -25,21 +25,20 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 export class HomeView extends React.Component {
-  constructor(prop) {
+  constructor (prop) {
     super(prop);
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const { actions } = this.props;
     actions.stream.requestStreams();
   }
 
-  handleStreamClick(streamId) {
-    console.log('action', this);
+  handleStreamClick (streamId) {
     this.props.actions.stream.changeCurrentStream(streamId);
   }
 
-  render() {
+  render () {
     const { currentStream, currentStreams, streams, channels } = this.props;
     const { streamId: currentStreamId } = currentStream;
     return (
@@ -55,7 +54,7 @@ export class HomeView extends React.Component {
               streamId={streamId}
               onClick={streamClick}
               key={streamId}/>);
-            }
+          }
           )}
         </div>
       </div>
