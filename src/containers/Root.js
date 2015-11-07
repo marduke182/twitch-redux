@@ -4,6 +4,7 @@ import routes                   from '../routes';
 import { ReduxRouter }          from 'redux-router';
 import DevTools                 from './DevTools';
 import { createDevToolsWindow } from '../utils';
+import { IntlProvider } from 'react-intl';
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -29,14 +30,16 @@ export default class Root extends React.Component {
   render () {
     return (
       <div>
-        <Provider store={this.props.store}>
-          <div>
-            <ReduxRouter>
-              {routes}
-            </ReduxRouter>
-            {this.renderDevTools()}
-          </div>
-        </Provider>
+        <IntlProvider locale='en'>
+          <Provider store={this.props.store}>
+            <div>
+              <ReduxRouter>
+                {routes}
+              </ReduxRouter>
+              {this.renderDevTools()}
+            </div>
+          </Provider>
+        </IntlProvider>
       </div>
     );
   }

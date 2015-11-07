@@ -1,7 +1,15 @@
 import 'isomorphic-fetch';
 import { arrayOf, normalize } from 'normalizr';
 import { streamSchema } from 'constants/Schema';
-import { REQUEST_STREAMS, RECEIVE_STREAMS } from 'constants/streams';
+import { REQUEST_STREAMS, RECEIVE_STREAMS, CHANGE_CURRENT_STREAM} from 'constants/streams';
+
+
+function changeCurrentStream (streamId) {
+  return {
+    type: CHANGE_CURRENT_STREAM,
+    streamId
+  };
+}
 
 
 function requestedStreams () {
@@ -19,7 +27,7 @@ function receiveStreams (entities, streams, nextUrl) {
   };
 }
 
-function requestStreams() {
+function requestStreams () {
   return dispatch => {
     dispatch(requestedStreams());
     return fetch('https://api.twitch.tv/kraken/streams')
@@ -33,5 +41,6 @@ function requestStreams() {
 
 
 export default {
-  requestStreams
+  requestStreams,
+  changeCurrentStream
 };
