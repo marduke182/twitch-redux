@@ -3,11 +3,8 @@ var app = express();
 
 //Create a static file server
 app.configure(function() {
-  app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '/dist'));
 });
-
-//Get the dummy data
-require('./server/ddata.js');
 
 var port = 8080;
 app.listen(port);
