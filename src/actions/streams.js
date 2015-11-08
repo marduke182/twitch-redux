@@ -46,16 +46,26 @@ function shouldFetchStreams (topStreams) {
   return false;
 }
 
-function fetchStreamsIfNeeded() {
-  return (dispath, getState) => {
+function getNextUrl ({ nextUrl }) {
+  if (nextUrl) {
+    return nextUrl;
+  } else {
+    return 'https://api.twitch.tv/kraken/streams';
+  }
+}
+
+function fetchStreamsIfNeeded () {
+  return (dispatch, getState) => {
     const { topStreams } = getState();
     if (shouldFetchStreams(topStreams)) {
-
+      const nextUrl = getNextUrl(topStreams);
+      dispatch(requestStreams(nextUrl));
     }
-  }
+  };
 }
 
 export default {
   requestStreams,
-  changeCurrentStream
+  changeCurrentStream,
+  fetchStreamsIfNeeded
 };

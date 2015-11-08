@@ -41,6 +41,6 @@ function requestTopGames () {
 
 
 export default {
-  requestStreams,
+  requestTopGames,
   changeCurrentStream
 };

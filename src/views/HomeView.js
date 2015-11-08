@@ -2,7 +2,6 @@ import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import streamActions          from 'actions/streams';
-import Stream                 from 'components/Stream';
 import Streams                 from 'components/Streams';
 import Player                 from 'components/Player';
 
