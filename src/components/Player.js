@@ -41,6 +41,7 @@ class Player extends React.Component {
 Player.propTypes = {
   channels: React.PropTypes.object,
   streams: React.PropTypes.object,
+  currentStream: React.PropTypes.object,
   streamId: React.PropTypes.number
 };
 

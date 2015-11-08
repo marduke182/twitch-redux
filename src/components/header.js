@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, NavBrand, Nav, NavItem, } from 'react-bootstrap';
+import { Navbar, NavBrand, Nav, NavItem } from 'react-bootstrap';
 
 export default () => (
   <Navbar inverse toggleNavKey={0} bsSize='small'>

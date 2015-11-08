@@ -27,10 +27,10 @@ function receiveGames (entities, games, nextUrl) {
   };
 }
 
-function requestTopGames () {
+function requestTopGames (url) {
   return dispatch => {
     dispatch(requestedGames());
-    return fetch('https://api.twitch.tv/kraken/games/top')
+    return fetch(url)
       .then(response => response.json())
       .then(({ top, _links }) => {
         const games = top.map(game => {
@@ -38,7 +38,7 @@ function requestTopGames () {
             viewers: game.viewers,
             channels: game.channels
           });
-        })
+        });
         const normalized = normalize(games, arrayOf(gameSchema));
         dispatch(receiveGames(normalized.entities, normalized.result, _links.next));
       });
@@ -46,7 +46,34 @@ function requestTopGames () {
 }
 
 
+function shouldFetchTopGames (games) {
+  if (!games || !games.isFetching && (games.nextUrl !== null)) {
+    return true;
+  }
+  return false;
+}
+
+function getNextUrl (games) {
+  if (games && games.nextUrl) {
+    return games.nextUrl;
+  } else {
+    return 'https://api.twitch.tv/kraken/games/top';
+  }
+}
+
+function fetchTopGamesIfNeeded () {
+  return (dispatch, getState) => {
+    const { topGames } = getState();
+    if (shouldFetchTopGames(topGames)) {
+      const nextUrl = getNextUrl(topGames);
+      dispatch(requestTopGames(nextUrl));
+    }
+  };
+}
+
+
 export default {
+  fetchTopGamesIfNeeded,
   requestTopGames,
   changeActiveGame
 };
