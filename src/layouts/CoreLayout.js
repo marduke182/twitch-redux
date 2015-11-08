@@ -2,6 +2,7 @@ import React from 'react';
 import 'styles/core.scss';
 import Header from 'components/Header';
 import Player from 'components/Player';
+import GitHubForkRibbon from 'react-github-fork-ribbon';
 
 
 export default class CoreLayout extends React.Component {
@@ -25,6 +26,12 @@ export default class CoreLayout extends React.Component {
           </iframe>
           {this.props.children}
           <Player/>
+          <GitHubForkRibbon position='right'
+                            color='green'
+                            href='//github.com/marduke182/twitchredux'
+                            target='_blank' >
+            Fork me on GitHub
+          </GitHubForkRibbon>
         </div>
       </div>
     );
