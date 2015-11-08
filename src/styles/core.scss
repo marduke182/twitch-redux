@@ -31,6 +31,10 @@ body {
     }
   }
 }
+.nodenockout-container {
+  @include flexbox();
+  @include justify-content(center);
+}
 
 $streamSize: 200px;
 
