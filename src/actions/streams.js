@@ -39,6 +39,21 @@ function requestStreams () {
   };
 }
 
+function shouldFetchStreams (topStreams) {
+  if (topStreams && topStreams.isFetching && topStreams !== null) {
+    return true;
+  }
+  return false;
+}
+
+function fetchStreamsIfNeeded() {
+  return (dispath, getState) => {
+    const { topStreams } = getState();
+    if (shouldFetchStreams(topStreams)) {
+
+    }
+  }
+}
 
 export default {
   requestStreams,

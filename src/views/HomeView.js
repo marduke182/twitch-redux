@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import streamActions          from 'actions/streams';
 import Stream                 from 'components/Stream';
+import Streams                 from 'components/Streams';
 import Player                 from 'components/Player';
 
 
@@ -27,6 +28,8 @@ const mapDispatchToProps = (dispatch) => ({
 export class HomeView extends React.Component {
   constructor (prop) {
     super(prop);
+    this.handleStreamClick = this.handleStreamClick.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentWillMount () {
@@ -38,6 +41,10 @@ export class HomeView extends React.Component {
     this.props.actions.stream.changeCurrentStream(streamId);
   }
 
+  handleScroll () {
+    console.log('must load next streams');
+  }
+
   render () {
     const { currentStream, currentStreams, streams, channels } = this.props;
     const { streamId: currentStreamId } = currentStream;
@@ -45,18 +52,13 @@ export class HomeView extends React.Component {
       <div className='container text-center'>
         <h1>Last Steams</h1>
         <Player channels={channels} streams={ streams } streamId={ currentStreamId }/>
-        <div className='streams-container row'>
-          {currentStreams.map(streamId => {
-            const streamClick = this.handleStreamClick.bind(this, streamId);
-            return (<Stream
-              streams={streams}
-              channels={channels}
-              streamId={streamId}
-              onClick={streamClick}
-              key={streamId}/>);
-          }
-          )}
-        </div>
+        <Streams
+          streams={currentStreams}
+          allStreams={streams}
+          channels={channels}
+          onStreamClick={this.handleStreamClick}
+          scrollFunc={this.handleScroll}
+        />
       </div>
     );
   }

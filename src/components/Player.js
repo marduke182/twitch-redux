@@ -9,14 +9,22 @@ class Player extends React.Component {
     if (stream) {
       channel = channels[stream.channel];
     }
+    const height = 600 * 9 / 16;
     let container;
     if (channel) {
-      container = (<iframe src={`http://player.twitch.tv/?channel=${channel.name}`} frameBorder='0' height='600px' width='100%'></iframe>);
+      container = (
+        <iframe
+          src={`http://player.twitch.tv/?channel=${channel.name}`}
+          frameBorder='0'
+          height={`${height}px`}
+          width='100%'
+          allowFullScreen='true'
+        ></iframe>);
     } else {
-      container = (<div>No selected stream</div>);
+      container = (<div></div>);
     }
     return (
-      <div className='stream-container col-md-12'>
+      <div className='player-container col-md-12'>
         {container}
       </div>
     );

@@ -4,7 +4,7 @@ import { Schema} from 'normalizr';
 const stream = new Schema('streams', {idAttribute : '_id'});
 const user = new Schema('users', {idAttribute : '_id'});
 const channel = new Schema('channels', {idAttribute : '_id'});
-const game = new Schema('games', {idAttribute : '_id'});
+const game = new Schema('games', {idAttribute : 'name'});
 
 stream.define({
   channel: channel
