@@ -19,10 +19,8 @@ export default () => (
           Games
         </NavItem>
       </LinkContainer>
-      <NavItem eventKey={1} href='#' bsSize='small'>
-      </NavItem>
-      <NavItem eventKey={1} href='#' bsSize='small'>
-      </NavItem>
+      <NavItem eventKey={1} href='#' bsSize='small'/>
+      <NavItem eventKey={1} href='#' bsSize='small'/>
     </Nav>
   </Navbar>
 );

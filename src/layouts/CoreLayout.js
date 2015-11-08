@@ -28,7 +28,7 @@ export default class CoreLayout extends React.Component {
           <Player/>
           <GitHubForkRibbon position='right'
                             color='green'
-                            href='//github.com/marduke182/twitchredux'
+                            href='//github.com/marduke182/twitch-redux'
                             target='_blank' >
             Fork me on GitHub
           </GitHubForkRibbon>
