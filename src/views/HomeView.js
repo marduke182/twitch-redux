@@ -38,7 +38,8 @@ export class HomeView extends React.Component {
   }
 
   handleScroll () {
-    console.log('must load next streams');
+    const { actions } = this.props;
+    actions.stream.fetchStreamsIfNeeded('top');
   }
 
   render () {
