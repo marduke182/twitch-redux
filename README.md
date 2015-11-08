@@ -6,8 +6,8 @@ Currently is running in the [nodeknockout](http://www.nodeknockout.com/) servers
 
 Project url [usb-in-barcelona.2015.nodeknockout.com](usb-in-barcelona.2015.nodeknockout.com).
 
-Thanks to: 
+Thanks to:
 
 *  [SoundRedux Project](https://github.com/andrewngu/sound-redux). Was an amazing starting point to async calls over redux.
 *  [Dan Abramov](https://github.com/gaearon). For all his libraries: [redux] (https://github.com/rackt/redux), [normalizr](https://github.com/gaearon/normalizr) and [redux-devtools](https://github.com/gaearon/redux-devtools).
-*  [React Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit). It's a very good start point. 
+*  [React Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit). It's a very good start point.

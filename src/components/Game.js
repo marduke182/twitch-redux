@@ -1,10 +1,11 @@
 import React from 'react';
-import {FormattedNumber} from 'react-intl';
-
+import format from 'format-number';
+const formatNumber = format();
 
 class Game extends React.Component {
   render () {
     const { game, onClick} = this.props;
+    const viewers = formatNumber(game.viewers);
     return (
       <div className='game-container col-md-3'>
         <div className='game-image' onClick={onClick}>
@@ -16,7 +17,7 @@ class Game extends React.Component {
         <div className='game-footer'>
           <div className='game-title'>{game.name}</div>
           <div className='game-viewers'>
-            <FormattedNumber value={game.viewers} /> viewers.
+            {viewers} viewers.
           </div>
         </div>
       </div>
