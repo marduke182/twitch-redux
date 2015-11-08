@@ -1,13 +1,19 @@
 import 'isomorphic-fetch';
 import { arrayOf, normalize } from 'normalizr';
 import { streamSchema } from 'constants/Schema';
-import { REQUEST_STREAMS, RECEIVE_STREAMS, CHANGE_CURRENT_STREAM} from 'constants/streams';
+import { REQUEST_STREAMS, RECEIVE_STREAMS, CHANGE_CURRENT_STREAM, RESET_CURRENT_STREAM} from 'constants/streams';
 
 
 function changeCurrentStream (streamId) {
   return {
     type: CHANGE_CURRENT_STREAM,
     streamId
+  };
+}
+
+function resetCurrentStream () {
+  return {
+    type: RESET_CURRENT_STREAM
   };
 }
 
@@ -75,5 +81,6 @@ function fetchStreamsIfNeeded (game) {
 export default {
   requestStreams,
   changeCurrentStream,
+  resetCurrentStream,
   fetchStreamsIfNeeded
 };

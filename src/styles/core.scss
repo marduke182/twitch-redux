@@ -15,6 +15,21 @@ body {
   right: 0;
   width: 600px;
   z-index: 4;
+  //background-color: white;
+  .player-actions {
+    display: none;
+    height: 20px;
+    width: 100%;
+    i{
+      float:right;
+      font-size: 2em;
+    }
+  }
+  &:hover {
+    .player-actions {
+      display: block;
+    }
+  }
 }
 
 $streamSize: 200px;
@@ -22,7 +37,7 @@ $streamSize: 200px;
 .streams-container {
   @include flexbox();
   @include flex-wrap(wrap);
-  @include justify-content(space-between);
+  @include justify-content(flex-start);
   .stream-container {
     @include flex(0, 1, 250px);
     border-radius: 5px;
@@ -33,6 +48,7 @@ $streamSize: 200px;
     max-height: $streamSize;
     min-height: $streamSize;
     overflow: hidden;
+    margin-left: 20px;
     .stream-image {
       position: relative;
       .overlay {
@@ -76,7 +92,7 @@ $streamSize: 200px;
 .games-container {
   @include flexbox();
   @include flex-wrap(wrap);
-  @include justify-content(space-between);
+  @include justify-content(flex-start);
   .game-container {
     @include flex(0, 1, 250px);
     border-radius: 5px;
@@ -85,6 +101,7 @@ $streamSize: 200px;
     border: 1px solid lightgray;
     margin-bottom: 10px;
     overflow: hidden;
+    margin-left: 20px;
     .game-image {
       position: relative;
       .overlay {
