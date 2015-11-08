@@ -86,7 +86,7 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node ./node_modules/karma/bin/karma start",
     "test:dev": "node ./node_modules/.bin/better-npm-run test:dev",
-    "deploy": "npm run lint && npm run test && npm run compile && modulus deploy"
+    "deploy": "npm run lint && npm run test && npm run compile"
   },
   "betterScripts": {
     "dev": {
