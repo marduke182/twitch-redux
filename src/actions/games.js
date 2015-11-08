@@ -1,12 +1,12 @@
 import 'isomorphic-fetch';
 import { arrayOf, normalize } from 'normalizr';
 import { gameSchema } from 'constants/Schema';
-import { REQUEST_STREAMS, RECEIVE_STREAMS, CHANGE_CURRENT_STREAM} from 'constants/streams';
+import { REQUEST_GAMES, RECEIVE_GAMES, CHANGE_ACTIVE_GAME} from 'constants/games';
 
 
-function changeCurrentStream (streamId) {
+function changeActiveGame (streamId) {
   return {
-    type: CHANGE_CURRENT_STREAM,
+    type: CHANGE_ACTIVE_GAME,
     streamId
   };
 }
@@ -14,13 +14,13 @@ function changeCurrentStream (streamId) {
 
 function requestedGames () {
   return {
-    type: REQUEST_STREAMS
+    type: REQUEST_GAMES
   };
 }
 
 function receiveGames (entities, games, nextUrl) {
   return {
-    type: RECEIVE_STREAMS,
+    type: RECEIVE_GAMES,
     entities,
     games,
     nextUrl
@@ -32,7 +32,13 @@ function requestTopGames () {
     dispatch(requestedGames());
     return fetch('https://api.twitch.tv/kraken/games/top')
       .then(response => response.json())
-      .then(({ games, _links }) => {
+      .then(({ top, _links }) => {
+        const games = top.map(game => {
+          return Object.assign(game.game, {
+            viewers: game.viewers,
+            channels: game.channels
+          });
+        })
         const normalized = normalize(games, arrayOf(gameSchema));
         dispatch(receiveGames(normalized.entities, normalized.result, _links.next));
       });
@@ -42,5 +48,5 @@ function requestTopGames () {
 
 export default {
   requestTopGames,
-  changeCurrentStream
+  changeActiveGame
 };

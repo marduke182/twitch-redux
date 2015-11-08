@@ -51,10 +51,14 @@ function shouldFetchStreams (streams, game) {
 
 function getNextUrl (streams, game ) {
   const gameStream = streams[game];
-  if (gameStream.nextUrl) {
+  if (gameStream && gameStream.nextUrl) {
     return gameStream.nextUrl;
   } else {
-    return 'https://api.twitch.tv/kraken/streams';
+    let baseUrl = 'https://api.twitch.tv/kraken/streams';
+    if (game && game !== 'top') {
+      baseUrl = `${baseUrl}?game=${game}`;
+    }
+    return baseUrl;
   }
 }
 

@@ -14,7 +14,7 @@ const stream = createReducer(initialStateStream, {
     items: [...state.items, ...streams],
     nextUrl: nextUrl
   }),
-  [REQUEST_STREAMS]: (state, action) => Object.assign({}, state, {
+  [REQUEST_STREAMS]: (state) => Object.assign({}, state, {
     isFetching: true,
     nextUrl: null
   })

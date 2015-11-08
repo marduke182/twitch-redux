@@ -2,7 +2,9 @@ import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import streamActions          from 'actions/streams';
+import gameActions            from 'actions/games';
 import Streams                 from 'components/Streams';
+import Games                 from 'components/Games';
 
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
@@ -13,13 +15,16 @@ import Streams                 from 'components/Streams';
 const mapStateToProps = (state) => ({
   streams: state.entities.streams,
   channels: state.entities.channels,
-  currentStreams: state.streams.items,
+  activeGame: state.activeGame,
+  games: state.topGames.items.map(item => state.entities.games[item]),
+  gameStreams: state.activeGame ? state.streams[state.activeGame].items : [],
   counter: state.counter,
   routerState: state.router
 });
 const mapDispatchToProps = (dispatch) => ({
   actions: {
-    stream: bindActionCreators(streamActions, dispatch)
+    stream: bindActionCreators(streamActions, dispatch),
+    game: bindActionCreators(gameActions, dispatch)
   }
 });
 export class GamesView extends React.Component {
@@ -27,15 +32,22 @@ export class GamesView extends React.Component {
     super(prop);
     this.handleStreamClick = this.handleStreamClick.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
-  }
-
-  componentWillMount () {
-    //const { actions } = this.props;
-    //actions.stream.requestStreams();
+    this.handleGameClick = this.handleGameClick.bind(this);
+    const { actions, gameStreams, activeGame, games} = this.props;
+    if (activeGame && (!gameStreams || gameStreams.length === 0)) {
+      actions.stream.fetchStreamsIfNeeded(activeGame);
+    }
+    if (!games || games.length === 0) {
+      actions.game.requestTopGames(activeGame);
+    }
   }
 
   handleStreamClick (streamId) {
     this.props.actions.stream.changeCurrentStream(streamId);
+  }
+
+  handleGameClick (gameName) {
+    this.props.actions.stream.changeActiveGame(gameName);
   }
 
   handleScroll () {
@@ -43,10 +55,16 @@ export class GamesView extends React.Component {
   }
 
   render () {
-    const { currentStreams, streams, channels } = this.props;
+    const { gameStreams, streams, channels, games } = this.props;
+
     return (
       <div className='container text-center'>
         <h1>Games</h1>
+        <Games
+          games={games}
+          onGameClick={this.handleGameClick}
+          scrollFunc={this.handleScroll}
+        />
       </div>
     );
   }
@@ -54,8 +72,10 @@ export class GamesView extends React.Component {
 
 GamesView.propTypes = {
   actions: React.PropTypes.object,
+  games: React.PropTypes.array,
   counter: React.PropTypes.number,
-  currentStreams: React.PropTypes.array,
+  activeGame: React.PropTypes.string,
+  gameStreams: React.PropTypes.array,
   streams: React.PropTypes.object,
   channels: React.PropTypes.object
 };

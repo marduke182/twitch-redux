@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 });
 class Player extends React.Component {
   render () {
-    const { currentStream, streams, channels} = this.props;
+    const { streams, channels, currentStream} = this.props;
     const { streamId } = currentStream;
     const stream = streams[streamId];
     let channel;
