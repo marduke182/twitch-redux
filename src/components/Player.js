@@ -1,9 +1,16 @@
 import React from 'react';
+import { connect }            from 'react-redux';
 
 
+const mapStateToProps = (state) => ({
+  streams: state.entities.streams,
+  channels: state.entities.channels,
+  currentStream: state.currentStream
+});
 class Player extends React.Component {
   render () {
-    const { streamId, streams, channels} = this.props;
+    const { currentStream, streams, channels} = this.props;
+    const { streamId } = currentStream;
     const stream = streams[streamId];
     let channel;
     if (stream) {
@@ -37,4 +44,5 @@ Player.propTypes = {
   streamId: React.PropTypes.number
 };
 
-export default Player;
+export default connect(mapStateToProps)(Player);
+

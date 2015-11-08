@@ -12,54 +12,58 @@ function changeCurrentStream (streamId) {
 }
 
 
-function requestedStreams () {
+function requestedStreams (game) {
   return {
-    type: REQUEST_STREAMS
+    type: REQUEST_STREAMS,
+    game
   };
 }
 
-function receiveStreams (entities, streams, nextUrl) {
+function receiveStreams (entities, streams, game, nextUrl) {
   return {
     type: RECEIVE_STREAMS,
     entities,
     streams,
+    game,
     nextUrl
   };
 }
 
-function requestStreams () {
+function requestStreams (url, game) {
   return dispatch => {
-    dispatch(requestedStreams());
-    return fetch('https://api.twitch.tv/kraken/streams')
+    dispatch(requestedStreams(game));
+    return fetch(url)
       .then(response => response.json())
       .then(({ streams, _links }) => {
         const normalized = normalize(streams, arrayOf(streamSchema));
-        dispatch(receiveStreams(normalized.entities, normalized.result, _links.next));
+        dispatch(receiveStreams(normalized.entities, normalized.result, game, _links.next));
       });
   };
 }
 
-function shouldFetchStreams (topStreams) {
-  if (topStreams && topStreams.isFetching && topStreams !== null) {
+function shouldFetchStreams (streams, game) {
+  const gameStream = streams[game];
+  if (!gameStream || !gameStream.isFetching && (gameStream.nextUrl !== null)) {
     return true;
   }
   return false;
 }
 
-function getNextUrl ({ nextUrl }) {
-  if (nextUrl) {
-    return nextUrl;
+function getNextUrl (streams, game ) {
+  const gameStream = streams[game];
+  if (gameStream.nextUrl) {
+    return gameStream.nextUrl;
   } else {
     return 'https://api.twitch.tv/kraken/streams';
   }
 }
 
-function fetchStreamsIfNeeded () {
+function fetchStreamsIfNeeded (game) {
   return (dispatch, getState) => {
-    const { topStreams } = getState();
-    if (shouldFetchStreams(topStreams)) {
-      const nextUrl = getNextUrl(topStreams);
-      dispatch(requestStreams(nextUrl));
+    const { streams } = getState();
+    if (shouldFetchStreams(streams, game)) {
+      const nextUrl = getNextUrl(streams, game);
+      dispatch(requestStreams(nextUrl, game));
     }
   };
 }

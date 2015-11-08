@@ -13,7 +13,7 @@ import Streams                 from 'components/Streams';
 const mapStateToProps = (state) => ({
   streams: state.entities.streams,
   channels: state.entities.channels,
-  topChannels: state.streams.top.items,
+  currentStreams: state.streams.items,
   counter: state.counter,
   routerState: state.router
 });
@@ -22,15 +22,16 @@ const mapDispatchToProps = (dispatch) => ({
     stream: bindActionCreators(streamActions, dispatch)
   }
 });
-export class HomeView extends React.Component {
+export class GamesView extends React.Component {
   constructor (prop) {
     super(prop);
     this.handleStreamClick = this.handleStreamClick.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
-    const { actions, topChannels} = this.props;
-    if (!topChannels || topChannels.length === 0) {
-      actions.stream.fetchStreamsIfNeeded('top');
-    }
+  }
+
+  componentWillMount () {
+    //const { actions } = this.props;
+    //actions.stream.requestStreams();
   }
 
   handleStreamClick (streamId) {
@@ -42,28 +43,21 @@ export class HomeView extends React.Component {
   }
 
   render () {
-    const { topChannels, streams, channels } = this.props;
+    const { currentStreams, streams, channels } = this.props;
     return (
       <div className='container text-center'>
-        <h1>Top Channels</h1>
-        <Streams
-          streams={topChannels}
-          allStreams={streams}
-          channels={channels}
-          onStreamClick={this.handleStreamClick}
-          scrollFunc={this.handleScroll}
-        />
+        <h1>Games</h1>
       </div>
     );
   }
 }
 
-HomeView.propTypes = {
+GamesView.propTypes = {
   actions: React.PropTypes.object,
   counter: React.PropTypes.number,
-  topChannels: React.PropTypes.array,
+  currentStreams: React.PropTypes.array,
   streams: React.PropTypes.object,
   channels: React.PropTypes.object
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
+export default connect(mapStateToProps, mapDispatchToProps)(GamesView);
