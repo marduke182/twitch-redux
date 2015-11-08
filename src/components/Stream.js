@@ -9,15 +9,17 @@ class Stream extends React.Component {
     const channel = channels[stream.channel];
 
     return (
-      <div className='stream-container col-md-4' onClick={onClick}>
-        <div className='stream-image'>
-          <img src={stream.preview.medium} />
+      <div className='stream-container col-md-3'>
+        <div className='stream-image' onClick={onClick}>
+          <img src={stream.preview.medium} width='100%'/>
+          <div className='overlay'>
+            <i className='glyphicon glyphicon-play-circle'></i>
+          </div>
         </div>
-        <div className='stream-game'>{stream.game}</div>
-        <div className='stream-title'>{channel.status}</div>
         <div className='stream-footer'>
+          <div className='stream-title'>{channel.status}</div>
           <div className='stream-viewers'>
-            <FormattedNumber value={stream.viewers} />
+            <FormattedNumber value={stream.viewers} /> viewers on {channel.name}
           </div>
         </div>
       </div>

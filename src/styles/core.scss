@@ -1,2 +1,141 @@
 @import 'base';
 @import 'vendor/normalize';
+@import '~sass-flex-mixin/flex';
+
+$action-color: #3381b7;
+
+body {
+  background-color: #f4f4f4;
+  font-family: Open Sans;
+  font-size: 14px;
+}
+.player-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 600px;
+  z-index: 4;
+  //background-color: white;
+  .player-actions {
+    display: none;
+    height: 20px;
+    width: 100%;
+    i{
+      float:right;
+      font-size: 2em;
+    }
+  }
+  &:hover {
+    .player-actions {
+      display: block;
+    }
+  }
+}
+
+$streamSize: 200px;
+
+.streams-container {
+  @include flexbox();
+  @include flex-wrap(wrap);
+  @include justify-content(flex-start);
+  .stream-container {
+    @include flex(0, 1, 250px);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+    max-height: $streamSize;
+    min-height: $streamSize;
+    overflow: hidden;
+    margin-left: 20px;
+    .stream-image {
+      position: relative;
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: none;
+        color: #fff;
+        @include justify-content(center);
+        @include align-items(center);
+        i {
+          font-size: 3em;
+        }
+      }
+      &:hover .overlay {
+        @include flexbox();
+        background: rgba(0, 0, 0, .6);
+
+      }
+    }
+    .stream-footer {
+      margin-top:10px;
+      .stream-title {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .stream-viewers {
+        font-size: .9em;
+        color:$action-color;
+      }
+    }
+  }
+
+}
+
+
+
+.games-container {
+  @include flexbox();
+  @include flex-wrap(wrap);
+  @include justify-content(flex-start);
+  .game-container {
+    @include flex(0, 1, 250px);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+    overflow: hidden;
+    margin-left: 20px;
+    .game-image {
+      position: relative;
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: none;
+        color: #fff;
+        @include justify-content(center);
+        @include align-items(center);
+        i {
+          font-size: 3em;
+        }
+      }
+      &:hover .overlay {
+        @include flexbox();
+        background: rgba(0, 0, 0, .6);
+
+      }
+    }
+    .game-footer {
+      margin-top:10px;
+      .game-title {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .game-viewers {
+        font-size: .9em;
+        color:$action-color;
+      }
+    }
+  }
+
+}

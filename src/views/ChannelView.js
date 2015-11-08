@@ -13,16 +13,15 @@ import Streams                 from 'components/Streams';
 const mapStateToProps = (state) => ({
   streams: state.entities.streams,
   channels: state.entities.channels,
-  topChannels: state.streams.top.items,
-  counter: state.counter,
-  routerState: state.router
+  gameName: state.router.params.channelName,
+  gameChannels: state.streams[state.router.params.channelName] ? state.streams[state.router.params.channelName].items : []
 });
 const mapDispatchToProps = (dispatch) => ({
   actions: {
     stream: bindActionCreators(streamActions, dispatch)
   }
 });
-export class HomeView extends React.Component {
+export class ChannelView extends React.Component {
   constructor (prop) {
     super(prop);
     this.handleStreamClick = this.handleStreamClick.bind(this);
@@ -30,9 +29,9 @@ export class HomeView extends React.Component {
   }
 
   componentWillMount () {
-    const { actions, topChannels} = this.props;
-    if (!topChannels || topChannels.length === 0) {
-      actions.stream.fetchStreamsIfNeeded('top');
+    const { actions, gameChannels, gameName} = this.props;
+    if (!gameChannels || gameChannels.length === 0) {
+      actions.stream.fetchStreamsIfNeeded(gameName);
     }
   }
 
@@ -41,17 +40,19 @@ export class HomeView extends React.Component {
   }
 
   handleScroll () {
-    const { actions } = this.props;
-    actions.stream.fetchStreamsIfNeeded('top');
+    const { actions, gameName} = this.props;
+    actions.stream.fetchStreamsIfNeeded(gameName);
   }
 
+
   render () {
-    const { topChannels, streams, channels } = this.props;
+    const { gameChannels, streams, channels, gameName } = this.props;
+
     return (
       <div className='container text-center'>
-        <h1>Top Channels</h1>
+        <h1>{gameName} Channels</h1>
         <Streams
-          streams={topChannels}
+          streams={gameChannels}
           allStreams={streams}
           channels={channels}
           onStreamClick={this.handleStreamClick}
@@ -62,12 +63,12 @@ export class HomeView extends React.Component {
   }
 }
 
-HomeView.propTypes = {
+ChannelView.propTypes = {
   actions: React.PropTypes.object,
-  counter: React.PropTypes.number,
-  topChannels: React.PropTypes.array,
+  gameChannels: React.PropTypes.array,
+  gameName: React.PropTypes.string,
   streams: React.PropTypes.object,
   channels: React.PropTypes.object
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
+export default connect(mapStateToProps, mapDispatchToProps)(ChannelView);
