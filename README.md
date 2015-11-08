@@ -4,7 +4,7 @@ Following the steps of [soundredux.io](https://github.com/andrewngu/sound-redux)
 
 Currently is running in the [nodeknockout](http://www.nodeknockout.com/) servers (this project was created to participate in this hackathon).
 
-Project url [usb-in-barcelona.2015.nodeknockout.com](usb-in-barcelona.2015.nodeknockout.com).
+Project url [usb-in-barcelona.2015.nodeknockout.com](http://usb-in-barcelona.2015.nodeknockout.com/).
 
 Thanks to: 
 
