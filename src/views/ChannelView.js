@@ -35,7 +35,6 @@ export class ChannelView extends React.Component {
     }
   }
 
-
   handleStreamClick (streamId) {
     this.props.actions.stream.changeCurrentStream(streamId);
   }
@@ -65,7 +64,11 @@ export class ChannelView extends React.Component {
 }
 
 ChannelView.propTypes = {
-
+  actions: React.PropTypes.object,
+  gameChannels: React.PropTypes.array,
+  gameName: React.PropTypes.string,
+  streams: React.PropTypes.object,
+  channels: React.PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelView);

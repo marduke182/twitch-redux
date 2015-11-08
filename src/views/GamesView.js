@@ -35,7 +35,7 @@ export class GamesView extends React.Component {
     this.handleGameClick = this.handleGameClick.bind(this);
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const { actions, gameStreams, activeGame, games} = this.props;
     if (activeGame && (!gameStreams || gameStreams.length === 0)) {
       actions.stream.fetchStreamsIfNeeded(activeGame);

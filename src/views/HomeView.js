@@ -29,7 +29,7 @@ export class HomeView extends React.Component {
     this.handleScroll = this.handleScroll.bind(this);
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const { actions, topChannels} = this.props;
     if (!topChannels || topChannels.length === 0) {
       actions.stream.fetchStreamsIfNeeded('top');
