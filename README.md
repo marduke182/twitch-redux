@@ -6,6 +6,13 @@ Currently is running in the [nodeknockout](http://www.nodeknockout.com/) servers
 
 Project url [usb-in-barcelona.2015.nodeknockout.com](http://usb-in-barcelona.2015.nodeknockout.com/).
 
+Next features:
+
+* Design improvements (Maybe add material-ui design).
+* Add the chat iframe next to the video.
+* Search feature
+* Authentication (Show following channels or games)
+
 Thanks to:
 
 *  [SoundRedux Project](https://github.com/andrewngu/sound-redux). Was an amazing starting point to async calls over redux.
