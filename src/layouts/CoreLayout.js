@@ -15,15 +15,17 @@ export default class CoreLayout extends React.Component {
       <div className='page-container'>
         <Header/>
         <div className='view-container'>
-          <iframe
-            src='http://nodeknockout.com/iframe/usb-in-barcelona'
-            frameBorder='0'
-            scrolling='no'
-            allowTransparency='true'
-            width='115'
-            height='25'
-          >
-          </iframe>
+          <div className='nodenockout-container'>
+            <iframe
+              src='http://nodeknockout.com/iframe/usb-in-barcelona'
+              frameBorder='0'
+              scrolling='no'
+              allowTransparency='true'
+              width='115'
+              height='25'
+            >
+            </iframe>
+          </div>
           {this.props.children}
           <Player/>
           <GitHubForkRibbon position='right'

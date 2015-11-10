@@ -1,5 +1,6 @@
 import React from 'react';
-import {FormattedNumber} from 'react-intl';
+import format from 'format-number';
+const formatNumber = format();
 
 
 class Stream extends React.Component {
@@ -7,7 +8,7 @@ class Stream extends React.Component {
     const { streamId, streams, channels, onClick} = this.props;
     const stream = streams[streamId];
     const channel = channels[stream.channel];
-
+    const viewers = formatNumber(stream.viewers);
     return (
       <div className='stream-container col-md-3'>
         <div className='stream-image' onClick={onClick}>
@@ -19,7 +20,7 @@ class Stream extends React.Component {
         <div className='stream-footer'>
           <div className='stream-title'>{channel.status}</div>
           <div className='stream-viewers'>
-            <FormattedNumber value={stream.viewers} /> viewers on {channel.name}
+            {viewers} viewers on {channel.name}
           </div>
         </div>
       </div>
