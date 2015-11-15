@@ -2,9 +2,7 @@
 
 Following the steps of [soundredux.io](https://github.com/andrewngu/sound-redux). I create this simple client of [Twitch](http://www.twitch.tv/) to learn how Redux works.
 
-Currently is running in the [nodeknockout](http://www.nodeknockout.com/) servers (this project was created to participate in this hackathon).
-
-Project url [usb-in-barcelona.2015.nodeknockout.com](http://usb-in-barcelona.2015.nodeknockout.com/).
+Project url [twitchredux.com](http://twitchredux.com/).
 
 Next features:
 
